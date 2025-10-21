@@ -1,4 +1,6 @@
 package cl.duoc.app.model
 
-class FormularioServicioErrores {
-}
+data class FormularioServicioErrores(
+    val nombreCliente: String? = null,
+    val correoCliente: String? = null
+)

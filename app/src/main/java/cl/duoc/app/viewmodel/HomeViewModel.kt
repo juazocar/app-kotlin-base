@@ -1,12 +1,33 @@
 package cl.duoc.app.viewmodel
 
 import androidx.lifecycle.ViewModel
+import cl.duoc.app.model.FormularioServicioUIState
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class HomeViewModel : ViewModel() {
-    private val _counter = MutableStateFlow(0)
-    val counter = _counter.asStateFlow()
+    private val _estado = MutableStateFlow(FormularioServicioUIState())
+    val estado: StateFlow<FormularioServicioUIState> = _estado
 
-    fun inc() { _counter.value++ }
+    fun onNombreChange(valor: String){
+        _estado.update {
+            it.copy(
+                nombreCliente = valor,
+                errores = it.errores.copy(nombreCliente = null)
+            )
+        }
+    }
+
+    fun onCorreoChange(valor: String){
+        _estado.update {
+            it.copy(
+                correoCliente = valor,
+                errores = it.errores.copy(correoCliente = null)
+            )
+        }
+    }
+
+
 }

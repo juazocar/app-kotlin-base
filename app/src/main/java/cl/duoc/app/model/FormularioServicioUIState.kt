@@ -1,4 +1,8 @@
 package cl.duoc.app.model
 
-class FormularioServicioUIState {
-}
+data class FormularioServicioUIState(
+    val nombreCliente: String = "",
+    val correoCliente: String = "",
+    val region: String = "",
+    val errores: FormularioServicioErrores = FormularioServicioErrores()
+)
