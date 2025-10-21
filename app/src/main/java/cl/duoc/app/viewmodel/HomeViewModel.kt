@@ -1,5 +1,4 @@
-package cl.duoc.app.ui
-
+package cl.duoc.app.viewmodel
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
