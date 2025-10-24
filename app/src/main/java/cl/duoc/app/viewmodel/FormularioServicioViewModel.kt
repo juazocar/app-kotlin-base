@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-class HomeViewModel : ViewModel() {
+class FormularioServicioViewModel : ViewModel() {
 
     private val _estado = MutableStateFlow(FormularioServicioUIState())
     val estado: StateFlow<FormularioServicioUIState> = _estado.asStateFlow()

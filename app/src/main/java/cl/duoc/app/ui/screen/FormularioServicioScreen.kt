@@ -19,7 +19,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cl.duoc.app.ui.components.InputText
-import cl.duoc.app.viewmodel.HomeViewModel
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.DropdownMenuItem
@@ -28,10 +27,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.setValue
+import cl.duoc.app.viewmodel.FormularioServicioViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun  FormularioServiocioScreen(viewModel: HomeViewModel = viewModel()) {
+fun  FormularioServiocioScreen(viewModel: FormularioServicioViewModel = viewModel()) {
     val estado by viewModel.estado.collectAsState()
 
     // Listado de regiones de Chile
