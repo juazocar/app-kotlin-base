@@ -1,31 +1,15 @@
 package cl.duoc.app
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.viewmodel.compose.viewModel
-import cl.duoc.app.ui.screen.HomeScreen
-import cl.duoc.app.viewmodel.HomeViewModel
+import cl.duoc.app.ui.AppNav
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            val vm = viewModel<HomeViewModel>()
-
-
-
-
-
-
-
-
-
-
-
-            
+            AppNav() // parte en Login y luego navega a Home
         }
     }
 }
