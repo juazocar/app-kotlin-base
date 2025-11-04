@@ -1,18 +1,9 @@
 package cl.duoc.app.ui.screen
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import android.app.Application
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,18 +11,18 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cl.duoc.app.ui.components.InputText
 import cl.duoc.app.viewmodel.HomeViewModel
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.runtime.setValue
+import cl.duoc.app.viewmodel.HomeViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun  FormularioServiocioScreen(viewModel: HomeViewModel = viewModel()) {
+fun FormularioServicioScreen() {
+
+    // ✅ Crear correctamente el ViewModel usando el Factory
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val viewModel: HomeViewModel = viewModel(
+        factory = HomeViewModelFactory(context.applicationContext as Application)
+    )
+
     val estado by viewModel.estado.collectAsState()
 
     // Listado de regiones de Chile
@@ -67,7 +58,7 @@ fun  FormularioServiocioScreen(viewModel: HomeViewModel = viewModel()) {
             style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
         )
 
-        // Nombre
+        // Campo Nombre
         InputText(
             valor = estado.nombreCliente,
             error = estado.errores.nombreCliente,
@@ -75,7 +66,7 @@ fun  FormularioServiocioScreen(viewModel: HomeViewModel = viewModel()) {
             onChange = viewModel::onNombreChange
         )
 
-        // Correo
+        // Campo Correo
         InputText(
             valor = estado.correoCliente,
             error = estado.errores.correoCliente,
@@ -106,6 +97,7 @@ fun  FormularioServiocioScreen(viewModel: HomeViewModel = viewModel()) {
                     }
                 }
             )
+
             ExposedDropdownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = false }
@@ -136,7 +128,6 @@ fun  FormularioServiocioScreen(viewModel: HomeViewModel = viewModel()) {
 
 @Preview(showBackground = true)
 @Composable
-fun FormularioServiocioScreenPreview() {
-    // Si el Preview falla por el ViewModel, crea una versión Stateless para previsualizar.
-    FormularioServiocioScreen()
+fun FormularioServicioScreenPreview() {
+    FormularioServicioScreen()
 }

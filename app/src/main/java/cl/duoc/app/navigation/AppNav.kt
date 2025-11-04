@@ -8,7 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.*
-import cl.duoc.app.ui.screen.FormularioServiocioScreen
+import cl.duoc.app.ui.screen.FormularioServicioScreen
 import cl.duoc.app.ui.screen.LoginScreen
 import cl.duoc.app.ui.screen.StartScreen
 import kotlinx.coroutines.CoroutineScope
@@ -58,7 +58,7 @@ fun AppNav() {
                     drawerState = drawerState,
                     scope = scope
                 ) {
-                    FormularioServiocioScreen()
+                    FormularioServicioScreen()
                 }
             }
         }

@@ -1,14 +1,17 @@
 package cl.duoc.app.viewmodel
 
 import androidx.lifecycle.ViewModel
-import cl.duoc.app.model.FormularioServicioErrores
+import androidx.lifecycle.viewModelScope
 import cl.duoc.app.model.FormularioServicioUIState
+import cl.duoc.app.model.entities.FormularioServicioEntity
+import cl.duoc.app.model.repository.FormularioServicioRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel (private val repository: FormularioServicioRepository) : ViewModel() {
 
     private val _estado = MutableStateFlow(FormularioServicioUIState())
     val estado: StateFlow<FormularioServicioUIState> = _estado.asStateFlow()
@@ -51,21 +54,32 @@ class HomeViewModel : ViewModel() {
     }
 
     fun onEnviarFormulario() {
-        val s = _estado.value
-        val errores = FormularioServicioErrores(
-            nombreCliente = if (s.nombreCliente.isBlank()) "El nombre es obligatorio" else null,
-            correoCliente = when {
-                s.correoCliente.isBlank() -> "El correo es obligatorio"
-                !EMAIL_REGEX.matches(s.correoCliente) -> "Formato de correo no válido"
-                else -> null
-            },
-            region = if (s.region.isBlank()) "La región es obligatoria" else null
+        val ui = _estado.value
+
+        // Validaciones básicas
+        val errores = ui.errores.copy(
+            nombreCliente = if (ui.nombreCliente.isBlank()) "El nombre es obligatorio" else null,
+            correoCliente = if (ui.correoCliente.isBlank()) "El correo es obligatorio" else null,
+            region = if (ui.region.isBlank()) "La región es obligatoria" else null
         )
 
+        // Actualiza errores en UI
         _estado.update { it.copy(errores = errores) }
 
-        if (!errores.tieneErrores()) {
-            // TODO: acción de envío (e.g., llamar a repositorio / navegar)
+        // Si hay errores, no persistir
+        if (errores.tieneErrores()) return
+
+        // Persistir en SQLite (Room)
+        viewModelScope.launch {
+            val entity = FormularioServicioEntity(
+                nombreCliente = ui.nombreCliente,
+                correoCliente = ui.correoCliente,
+                region = ui.region
+            )
+            repository.guardarFormulario(entity)
+
+            // Opcional: limpiar formulario
+            _estado.update { FormularioServicioUIState() }
         }
     }
 
