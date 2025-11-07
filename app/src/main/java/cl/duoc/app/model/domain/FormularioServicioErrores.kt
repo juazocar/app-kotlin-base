@@ -1,4 +1,4 @@
-package cl.duoc.app.model
+package cl.duoc.app.model.domain
 
 data class FormularioServicioErrores(
     val nombreCliente: String? = null,

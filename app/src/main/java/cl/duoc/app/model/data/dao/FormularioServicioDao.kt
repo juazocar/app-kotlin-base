@@ -1,16 +1,16 @@
-package cl.duoc.app.model.data
+package cl.duoc.app.model.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import cl.duoc.app.model.entities.FormularioServicioEntity
+import cl.duoc.app.model.data.entities.FormularioServicioEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FormularioServicioDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insertFormulario(formulario: FormularioServicioEntity): Long
 
     @Query("SELECT * FROM formulario_servicio ORDER BY id DESC")

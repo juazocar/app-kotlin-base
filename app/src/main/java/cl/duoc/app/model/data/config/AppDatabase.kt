@@ -1,10 +1,11 @@
-package cl.duoc.app.model.data
+package cl.duoc.app.model.data.config
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import cl.duoc.app.model.entities.FormularioServicioEntity
+import cl.duoc.app.model.data.dao.FormularioServicioDao
+import cl.duoc.app.model.data.entities.FormularioServicioEntity
 
 @Database(
     entities = [FormularioServicioEntity::class],

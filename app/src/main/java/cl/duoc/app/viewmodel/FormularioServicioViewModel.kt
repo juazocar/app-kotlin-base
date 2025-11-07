@@ -2,9 +2,9 @@ package cl.duoc.app.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import cl.duoc.app.model.FormularioServicioUIState
-import cl.duoc.app.model.entities.FormularioServicioEntity
-import cl.duoc.app.model.repository.FormularioServicioRepository
+import cl.duoc.app.model.domain.FormularioServicioUIState
+import cl.duoc.app.model.data.entities.FormularioServicioEntity
+import cl.duoc.app.model.data.repository.FormularioServicioRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
