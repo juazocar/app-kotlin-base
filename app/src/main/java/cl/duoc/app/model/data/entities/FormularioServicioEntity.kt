@@ -1,4 +1,4 @@
-package cl.duoc.app.model.entities
+package cl.duoc.app.model.data.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

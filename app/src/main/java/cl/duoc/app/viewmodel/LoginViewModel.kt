@@ -1,7 +1,7 @@
 package cl.duoc.app.viewmodel
 
 import androidx.lifecycle.ViewModel
-import cl.duoc.app.model.LoginUIState
+import cl.duoc.app.model.domain.LoginUIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
